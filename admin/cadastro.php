@@ -16,13 +16,13 @@ include("session.php");
         <title>SB Admin - Bootstrap Admin Template</title>
 
         <!-- Bootstrap Core CSS -->
-        <link href="css/bootstrap.min.css" rel="stylesheet">
+        <link href="/layout/css/bootstrap.min.css" rel="stylesheet">
 
         <!-- Custom CSS -->
-        <link href="css/sb-admin.css" rel="stylesheet">
+        <link href="/layout/css/sb-admin.css" rel="stylesheet">
 
         <!-- Custom Fonts -->
-        <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+        <link href="/layout/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -224,7 +224,7 @@ include("session.php");
                     <div class="row">
                         <div class="col-lg-6">
 
-                            <form role="form" action="cadastrarmain.php" method="post">
+                            <form role="form" action="/cadastros/cadastrarmain.php" method="post">
                                 <h3>Dados Pessoais</h3>
                                 <div class="form-group">
                                     <label>Nome Completo</label>
@@ -345,10 +345,10 @@ include("session.php");
         <!-- /#wrapper -->
 
         <!-- jQuery -->
-        <script src="js/jquery.js"></script>
+        <script src="/layout/js/jquery.js"></script>
 
         <!-- Bootstrap Core JavaScript -->
-        <script src="js/bootstrap.min.js"></script>
+        <script src="/layout/js/bootstrap.min.js"></script>
         <script type="text/javascript">
             function habilitaBtn() {
                 var op = document.getElementById("opcao").value;
