@@ -1,0 +1,19 @@
+<?php
+include("conecta.php");
+error_reporting (E_ALL & ~ E_NOTICE & ~ E_DEPRECATED);
+session_start();
+ 
+//Caso o usuário não esteja autenticado, limpa os dados e redireciona
+if ( !isset($_SESSION['usuarioLogin']) and !isset($_SESSION['senha']) ) {
+    //Destrói
+    session_destroy();
+ 
+    //Limpa
+    unset ($_SESSION['usuarioLogin']);
+    unset ($_SESSION['senha']);
+     
+    //Redireciona para a página de autenticação
+    header('location:/login.php');
+}
+
+?>
