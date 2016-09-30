@@ -224,8 +224,8 @@ include("session.php");
                     <div class="row">
                         <div class="col-lg-6">
 
-                            <form role="form">
-                                <h3>Disabled Form States</h3>
+                            <form role="form" action="cadastrarmain.php" method="post">
+                                <h3>Dados Pessoais</h3>
                                 <div class="form-group">
                                     <label>Nome Completo</label>
                                     <input class="form-control" name="nome" required autofocus>
@@ -238,12 +238,12 @@ include("session.php");
                                 <div class="form-group">
                                     <label>Bairro</label>
                                     <select class="form-control" name="bairro">
-                                    <option>Selecione</option>
+                                    <option value="">Selecione</option>
                                     <?php
                                     $consultabairro = mysql_query("SELECT * FROM tb_bairros order by bai_bairro");
                                     while($resultbairro = mysql_fetch_array( $consultabairro ) )
                                     {
-                                    $codbai = $resultbairro ['bai_codigo'];
+                                    $codbai = $resultbairro ['id_bairro'];
                                     $bai = $resultbairro ['bai_bairro'];
                                     echo "<option value='$codbai'>$bai</option>";
                                     }
@@ -265,23 +265,23 @@ include("session.php");
                                     <label>Sexo</label>
                                     <div class="radio">
                                         <label>
-                                        <input type="radio" name="sexo" id="optionsRadios1" value="option1">Masculino
+                                        <input type="radio" name="sexo" id="optionsRadios1" value="Masculino">Masculino
                                     </label>
                                         <label>
-                                        <input type="radio" name="sexo" id="optionsRadios2" value="option2">Feminino
+                                        <input type="radio" name="sexo" id="optionsRadios2" value="Feminino">Feminino
                                     </label><br><br>
                                     </div>
                                 </div>
                         </div>
                         <div class="col-lg-6">
                             <div class="form-group">
-                                <h3>Disabled Form States</h3>
+                                <h3>Dados Eclesiasticos</h3>
                                 <label>Tipo Cadastro</label>
-                                <select class="form-control" onchange="habilitaBtn()" id="opcao" nome="tipo" required>
-                                                <option  name="ativo" value=""/>Selecione</option>
-                                                <option name="ativo" value="1"/>Discípulo</option>
-                                                <option name="ativo" value="2"/>Discipulador</option>
-                                            </select>
+                                <select class="form-control" onchange="habilitaBtn()" id="opcao" name="tipo" required>
+                                                <option  value="" selected>Selecione</option>
+                                                <option  value="1">Discípulo</option>
+                                                <option  value="2">Discipulador</option>
+                                </select>
                             </div>
 
 
@@ -290,16 +290,16 @@ include("session.php");
 
                                 <div class="form-group">
                                     <label style="display:none;" id="avancarlabels">Decisão Do Discipulo</label>
-                                    <select class="form-control" onchange="escolhadecisao()" id="avancars" style="display:none;" type="text" nome="estadodsr">
-                                        <option name="ativo" value="" selected>Selecione</option>
-                                        <option name="ativo" value="1">Batismo</option>
-                                        <option name="ativo" value="2">Não Convertido</option>
-                                        <option name="ativo" value="3">Novo Convertido</option>
+                                    <select class="form-control" onchange="escolhadecisao()" id="avancars" style="display:none;" type="text" name="decisao">
+                                        <option  value="" selected>Selecione</option>
+                                        <option value="1">Batismo</option>
+                                        <option value="2">Não Convertido</option>
+                                        <option value="3">Novo Convertido</option>
                                     </select>
                                 </div>
                                 <div class="form-group">
                                     <label style="display:none;" id="avancarlabel">Estado Discipulador</label>
-                                    <select class="form-control" style="display:none;" id="avancar" type="text" nome="decisao">
+                                    <select class="form-control" style="display:none;" id="avancar" type="text" name="status">
                                         <option value='' selected>Selecione</option>
                                         <option value="1">Ativo</option>
                                         <option value="2">Inativo</option>
@@ -309,7 +309,7 @@ include("session.php");
                         <div class="col-lg-2">
                             <div class="form-group">
                                 <label style="display:none;" id="ldatab">Data do Batismo</label>
-                                <input type="date" style="display:none;" class="form-control" id="databatismo" nome="databatismo">
+                                <input type="date" style="display:none;" class="form-control" id="databatismo" name="databatismo">
 
                                 </select>
                             </div>
@@ -317,7 +317,7 @@ include("session.php");
                         <div class="col-lg-2">
                             <div class="form-group">
                                 <label id="ldatad" style="display:none;">Data decisão</label>
-                                <input type="date" class="form-control" style="display:none;" id="datadecisao" nome="datadecisao">
+                                <input type="date" class="form-control" style="display:none;" id="datadecisao" name="datadecisao">
 
                                 </select>
                             </div>
@@ -325,7 +325,7 @@ include("session.php");
                         <div class="col-lg-2">
                             <div class="form-group">
                                 <label style="display:none;" id="ldatan">Data Nascimento</label>
-                                <input type="date" style="display:none;" class="form-control" id="datanascimento" nome="datanascimento">
+                                <input type="date" style="display:none;" class="form-control" id="datanascimento" name="datanascimento">
 
                                 </select>
                             </div>
@@ -379,7 +379,7 @@ include("session.php");
                     document.getElementById('avancarlabels').style.display = 'none';
                     document.getElementById('avancars').value = '';
                     var myInput = document.getElementById('btnsubmit');
-                    myInput.disabled = true;
+                    myInput.disabled = false;
 
                 } else {
                     if (document.getElementById('avancars').style.display) document.getElementById('avancar').style.display = 'none'
