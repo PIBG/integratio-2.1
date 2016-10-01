@@ -13,7 +13,7 @@ include("session.php");
         <meta name="description" content="">
         <meta name="author" content="">
 
-        <title>SB Admin - Bootstrap Admin Template</title>
+        <title>PIBG Sys - Cadastro</title>
 
         <!-- Bootstrap Core CSS -->
         <link href="/layout/css/bootstrap.min.css" rel="stylesheet">
@@ -217,10 +217,23 @@ include("session.php");
                                     <i class="fa fa-edit"></i> Cadastro
                                 </li>
                             </ol>
+                            <?php
+				    if(isset($_SESSION['sucessocadastrar'])){
+					echo $_SESSION['sucessocadastrar'];
+					unset($_SESSION['sucessocadastrar']);
+				    }
+                            ?>
+                             <?php
+				    if(isset($_SESSION['errocadastrar'])){
+					echo $_SESSION['errocadastrar'];
+					unset($_SESSION['errocadastrar']);
+				    }
+                       ?>
+                           
                         </div>
                     </div>
                     <!-- /.row -->
-
+                    
                     <div class="row">
                         <div class="col-lg-6">
 
@@ -352,26 +365,21 @@ include("session.php");
         <script type="text/javascript">
             function habilitaBtn() {
                 var op = document.getElementById("opcao").value;
-
                 if (op == "") {
-                    if (!document.getElementById('avancar').style.display) document.getElementById('avancar').style.display = 'none'
+                  if (!document.getElementById('avancar').style.display) document.getElementById('avancar').style.display = 'none'
                     document.getElementById('avancars').style.display = 'none';
                     document.getElementById('avancarlabel').style.display = 'none';
                     document.getElementById('avancar').value = '';
                     document.getElementById('avancars').value = '';
                     var myInput = document.getElementById('btnsubmit');
                     myInput.disabled = true;
-
-                }
-                if (op == "") {
-                    if (document.getElementById('avancars').style.display) document.getElementById('avancar').style.display = 'none'
-                    document.getElementById('avancars').style.display = 'none';
-                    document.getElementById('avancarlabel').style.display = 'none';
-                    document.getElementById('avancar').value = '';
-                    document.getElementById('avancars').value = '';
-                    var myInput = document.getElementById('btnsubmit');
-                    myInput.disabled = true;
-
+                    document.getElementById('avancarlabels').style.display = 'none';
+                    document.getElementById('datadecisao').style.display = 'none';
+                    document.getElementById('ldatad').style.display = 'none';
+                    document.getElementById('datanascimento').style.display = 'none';
+                    document.getElementById('ldatan').style.display = 'none';
+                    document.getElementById('databatismo').style.display = 'none';
+                    document.getElementById('ldatab').style.display = 'none';
                 } else if (op == "2") {
                     if (document.getElementById('avancar').style.display) document.getElementById('avancar').style.display = 'block'
                     document.getElementById('avancars').style.display = 'none';
@@ -380,7 +388,12 @@ include("session.php");
                     document.getElementById('avancars').value = '';
                     var myInput = document.getElementById('btnsubmit');
                     myInput.disabled = false;
-
+                    document.getElementById('datadecisao').style.display = 'none';
+                    document.getElementById('ldatad').style.display = 'none';
+                    document.getElementById('datanascimento').style.display = 'none';
+                    document.getElementById('ldatan').style.display = 'none';
+                    document.getElementById('databatismo').style.display = 'none';
+                    document.getElementById('ldatab').style.display = 'none';
                 } else {
                     if (document.getElementById('avancars').style.display) document.getElementById('avancar').style.display = 'none'
                     document.getElementById('avancars').style.display = 'block';
@@ -389,15 +402,18 @@ include("session.php");
                     document.getElementById('avancar').value = '';
                     var myInput = document.getElementById('btnsubmit');
                     myInput.disabled = true;
+                    document.getElementById('datadecisao').style.display = 'none';
+                    document.getElementById('ldatad').style.display = 'none';
+                    document.getElementById('datanascimento').style.display = 'none';
+                    document.getElementById('ldatan').style.display = 'none';
+                    document.getElementById('databatismo').style.display = 'none';
+                    document.getElementById('ldatab').style.display = 'none';
                 }
             }
-
         </script>
         <script type="text/javascript">
             function escolhadecisao() {
                 var op = document.getElementById("avancars").value;
-
-
                 if (op == "1") {
                     if (!document.getElementById('databatismo').style.display) document.getElementById('databatismo').style.display = 'block'
                     document.getElementById('datadecisao').style.display = 'block';
@@ -412,24 +428,23 @@ include("session.php");
                     myInput.disabled = false;
                     var myInput = document.getElementById('btnsubmit');
                     myInput.disabled = false;
-
-
                 }
                 if (op == "2") {
                     if (!document.getElementById('databatismo').style.display) document.getElementById('databatismo').style.display = 'none'
-                    document.getElementById('datadecisao').style.display = 'none';
-                    document.getElementById('ldatad').style.display = 'none';
-                    document.getElementById('datanascimento').style.display = 'none';
-                    document.getElementById('ldatan').style.display = 'none';
-                    document.getElementById('databatismo').style.display = 'none';
-                    document.getElementById('ldatab').style.display = 'none';
+                    document.getElementById('datadecisao').style.display = 'block';
+                    document.getElementById('ldatad').style.display = 'block';
+                    document.getElementById('datanascimento').style.display = 'block';
+                    document.getElementById('ldatan').style.display = 'block';
+                    document.getElementById('databatismo').style.display = 'block';
+                    document.getElementById('ldatab').style.display = 'block';
+                     var myInput = document.getElementById('datanascimento');
+                    myInput.disabled = false;
                     var myInput = document.getElementById('datadecisao');
-                    myInput.disabled = false;
+                    myInput.disabled = true;
                     var myInput = document.getElementById('databatismo');
-                    myInput.disabled = false;
+                    myInput.disabled = true;
                     var myInput = document.getElementById('btnsubmit');
                     myInput.disabled = false;
-
                 }
                 if (op == "3") {
                     if (document.getElementById('datadecisao').style.display)
@@ -461,9 +476,7 @@ include("session.php");
                     var myInput = document.getElementById('btnsubmit');
                     myInput.disabled = true;
                 }
-
             }
-
         </script>
     </body>
 
