@@ -96,7 +96,7 @@ if (empty($bairro) or empty($sexo) or empty($estadocivil)){
 $_SESSION['errocadastrar']='
 <div class="alert alert-warning alert-dismissible" role="alert">
   <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-  <strong>Deu Merda!</strong> Os campos com * são obrigatorios!
+  <strong>Atenção!</strong> Os campos com * são obrigatorios!
 </div>';
 } 
 
