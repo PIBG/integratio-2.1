@@ -39,7 +39,7 @@ if($tipo == 1){
         }
     }
 //DECISÃO FOR NÃO COMVERTIDO
-    if($decisao == 2 and isset ($sexo) and isset ($bairro)){
+    if($decisao == 2 and isset ($sexo) and isset ($bairro) and isset ($estadocivil)){
         if (empty ($datanascimento)){
             $_SESSION['errocadastrar']='
             <div class="alert alert-warning alert-dismissible" role="alert">
@@ -47,34 +47,31 @@ if($tipo == 1){
                 <strong>Atenção!</strong> Data de nascimento <b>NÃO</b> prenchido!
             </div>';
         }else{
-            $sql ="INSERT INTO `tb_main` (`id_main`, `dsc_nome`, `dsc_sexo`, `dsc_endereco`, `dsc_id_bairro`, `dsc_dta_cadastro`, `dsc_id_sta_discipulador`, `dsc_id_decisao`, `dsc_est_civil`,`dsc_data_batismo`,`dsc_data_nascimento`,`dsc_data_decisao`) VALUES (NULL, '$nome', '$sexo', '$endereco', '$bairro', '$datanow', NULL, '$decisao', '$estadocivil', NULL, '$datanacimento', NULL)";  
+            $sql ="INSERT INTO `tb_main` (`id_main`, `dsc_nome`, `dsc_sexo`, `dsc_endereco`, `dsc_id_bairro`, `dsc_dta_cadastro`, `dsc_id_sta_discipulador`, `dsc_id_decisao`, `dsc_est_civil`,`dsc_data_batismo`,`dsc_data_nascimento`,`dsc_data_decisao`) VALUES (NULL, '$nome', '$sexo', '$endereco', '$bairro', '$datanow', NULL, '$decisao', '$estadocivil', NULL, '$datanascimento', NULL)";  
         }
     }
     //DECISÃO FOR NOVO COMVERTIDO
     if($decisao == 3 and isset ($sexo) and isset ($bairro) and isset ($estadocivil)){
-        if ($decisao == 3 and  empty ($datanascimento) or empty ($datadecisao)){
+        if ( empty ($datanascimento) or empty ($datadecisao)){
         $_SESSION['errocadastrar']='
             <div class="alert alert-warning alert-dismissible" role="alert">
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 <strong>Atenção!</strong>Data de nascimento ou data da decisão <b>NÃO</b> prenchidos!
             </div>';
         }else{
-            $sql ="INSERT INTO `tb_main` (`id_main`, `dsc_nome`, `dsc_sexo`, `dsc_endereco`, `dsc_id_bairro`, `dsc_dta_cadastro`, `dsc_id_sta_discipulador`, `dsc_id_decisao`, `dsc_est_civil`,`dsc_data_batismo`,`dsc_data_nascimento`,`dsc_data_decisao`) VALUES (NULL, '$nome', '$sexo', '$endereco', '$bairro', '$datanow', NULL, '$decisao', '$estadocivil', NULL, '$datanacimento', '$datadecisao')";  
+            $sql ="INSERT INTO `tb_main` (`id_main`, `dsc_nome`, `dsc_sexo`, `dsc_endereco`, `dsc_id_bairro`, `dsc_dta_cadastro`, `dsc_id_sta_discipulador`, `dsc_id_decisao`, `dsc_est_civil`,`dsc_data_batismo`,`dsc_data_nascimento`,`dsc_data_decisao`) VALUES (NULL, '$nome', '$sexo', '$endereco', '$bairro', '$datanow', NULL, '$decisao', '$estadocivil', NULL, '$datanascimento', '$datadecisao')";  
         }
     }      
 }
-if ($type == 2){
+        
+if($tipo == 2){
     //SE FOR DISCIPULADOR
-    $sql ="INSERT INTO `tb_main` (`id_main`, `dsc_nome`, `dsc_sexo`, `dsc_endereco`, `dsc_id_bairro`, `dsc_dta_cadastro`, `dsc_id_sta_discipulador`, `dsc_id_decisao`, `dsc_est_civil`,`dsc_data_batismo`,`dsc_data_nascimento`,`dsc_data_decisao`) VALUES (NULL, '$nome', '$sexo', '$endereco', '$bairro', '$datanow',  '$status' , NULL, '$estadocivil', NULL, NULL, NULL)";
-
+        if( isset ($status) ){
+        $sql =  "INSERT INTO `tb_main` (`id_main`, `dsc_nome`, `dsc_sexo`, `dsc_endereco`, `dsc_id_bairro`, `dsc_dta_cadastro`, `dsc_id_sta_discipulador`, `dsc_id_decisao`, `dsc_est_civil`,`dsc_data_batismo`,`dsc_data_nascimento`,`dsc_data_decisao`) VALUES (NULL, '$nome', '$sexo', '$endereco', '$bairro', '$datanow',  '$status' , NULL, '$estadocivil', NULL, NULL, NULL)";
+        }
 }
 
-
 //CADASTRO NO BANCO DE DADOS (TABELA TYPE)
-
-
-
-
 
 if (mysql_query($sql,$conectar)){
 $ultimo_id = mysql_insert_id($conectar);
@@ -83,25 +80,20 @@ $type ="INSERT INTO `tb_type`(`type_id_main`, `id_tipo`) VALUES (".$ultimo_id.",
 }
         
 if (mysql_query($type,$conectar)){
- $_SESSION['sucessocadastrar']='
- 
+ $_SESSION['sucessocadastrar']=' 
 <div class="alert alert-success alert-dismissible" role="alert">
     <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-    <strong>Well done!</strong> Cadastrado com Sucesso.
+    <strong>Tudo certo!</strong> Cadastrado efetuado com Sucesso.
 </div>';
 }
 
-if (empty($bairro) or empty($sexo) or empty($estadocivil)){
-
-$_SESSION['errocadastrar']='
-<div class="alert alert-warning alert-dismissible" role="alert">
-  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-  <strong>Atenção!</strong> Os campos com * são obrigatorios!
-</div>';
-} 
-
-
-
+else{
+    $_SESSION['errocadastrar']='
+        <div class="alert alert-warning alert-dismissible" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <strong>Atenção!</strong> Os campos com <b style="color:red">*</b> são obigatorios!
+        </div>';
+        }
 ?>  
     </body>
 </html>
